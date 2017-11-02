@@ -11,3 +11,9 @@ Bowei Wang - wang.bowe@husky.neu.edu
 Qichu Zhao - zhao.qic@husky.neu.edu
 
 You Li - li.you1@husky.neu.edu
+
+# Stock Price Prediction based on Hitorical Data
+
+# Abstract
+
+The goal of this project is to predict stock price movement based on historical data points and visualize the difference between the prediction and the actual stock prices. If time permits, we would also like to apply this algorithm to the real-time stock quotes. 
