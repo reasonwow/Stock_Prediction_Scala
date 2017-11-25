@@ -22,7 +22,7 @@ object SimpleApp {
     val formattedData = spark
     .read
     .option("header", "true")
-    .csv("/Users/kym1992/STUDY/NEU/CSYE7200/Dataset/nyse/prices-split-adjusted.csv")
+    .csv("/Users/ZappyZhao/Stock_Prediction_Scala/Raw Data/nyse/prices-split-adjusted.csv")
       .drop("open", "low", "high", "volume")
 
     val finalDf = formattedData
