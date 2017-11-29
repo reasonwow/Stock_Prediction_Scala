@@ -1,5 +1,0 @@
-package ingest
-
-class PriceDataSpec {
-
-}
