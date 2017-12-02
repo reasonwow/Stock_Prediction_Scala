@@ -40,6 +40,4 @@ libraryDependencies += "org.datavec" % "datavec-dataframe" % "0.9.1"
 
 libraryDependencies += "com.opencsv" % "opencsv" % "3.9"
 
-libraryDependencies += "org.jfree" % "jfreechart" % "1.0.19"
-
 libraryDependencies += "com.google.guava" % "guava" % "23.0"
