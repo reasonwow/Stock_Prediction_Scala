@@ -14,12 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by zhanghao on 26/7/17.
- * Modified by zhanghao on 28/9/17.
- * @author ZHANG HAO
- */
 public class StockPricePrediction {
 
     private static final Logger log = LoggerFactory.getLogger(StockPricePrediction.class);
@@ -36,7 +32,7 @@ public class StockPricePrediction {
         PriceCategory category = PriceCategory.CLOSE; // CLOSE: predict close price
         StockDataSetIterator iterator = new StockDataSetIterator(file, symbol, batchSize, exampleLength, splitRatio, category);
         System.out.println("Load test dataset...");
-        List<Pair<INDArray, INDArray>> test = iterator.getTestDataSet();
+        List<Map.Entry<INDArray, INDArray>> test = iterator.getTestDataSet();
 
         System.out.println("Build lstm networks...");
         MultiLayerNetwork net = RecurrentNets.buildLstmNetworks(iterator.inputColumns(), iterator.totalOutcomes());
@@ -65,7 +61,7 @@ public class StockPricePrediction {
     }
 
     /** Predict one feature of a stock one-day ahead */
-    private static Result predictPriceOneAhead (MultiLayerNetwork net, List<Pair<INDArray, INDArray>> testData, double max, double min, PriceCategory category) {
+    private static Result predictPriceOneAhead (MultiLayerNetwork net, List<Map.Entry<INDArray, INDArray>> testData, double max, double min, PriceCategory category) {
         double[] predicts = new double[testData.size()];
         double[] actuals = new double[testData.size()];
         for (int i = 0; i < testData.size(); i++) {

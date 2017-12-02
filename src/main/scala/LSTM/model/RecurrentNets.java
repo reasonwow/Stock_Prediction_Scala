@@ -14,10 +14,6 @@ import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
-/**
- * Created by zhanghao on 26/7/17.
- * @author ZHANG HAO
- */
 public class RecurrentNets {
 	
 	private static final double learningRate = 0.05;

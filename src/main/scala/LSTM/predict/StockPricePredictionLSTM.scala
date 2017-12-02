@@ -1,15 +1,13 @@
 package LSTM.predict
 
 import java.io.File
-import java.util.List
-import javafx.util.Pair
+import java.util.{List, Map}
 
 import LSTM.model.RecurrentNets
 import LSTM.representation.{PriceCategory, Result, StockDataSetIterator}
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.deeplearning4j.util.ModelSerializer
 import org.nd4j.linalg.api.ndarray.INDArray
-import org.slf4j.{Logger, LoggerFactory}
 
 object StockPricePredictionLSTM {
   val exampleLength: Int = 22
@@ -51,9 +49,9 @@ object StockPricePredictionLSTM {
   }
 
   /** Predict one feature of a stock one-day ahead */
-  private def predictPriceOneAhead(net: MultiLayerNetwork, testData: List[Pair[INDArray, INDArray]], max: Double, min: Double, category: PriceCategory) = {
-    val predicts = new Array[Double](testData.size)
-    val actuals = new Array[Double](testData.size)
+  private def predictPriceOneAhead(net: MultiLayerNetwork, testData: List[Map.Entry[INDArray, INDArray]], max: Double, min: Double, category: PriceCategory) = {
+    var predicts = new Array[Double](testData.size)
+    var actuals = new Array[Double](testData.size)
     var i = 0
     while (i < testData.size) {
       predicts(i) = net.rnnTimeStep(testData.get(i).getKey).getDouble(exampleLength - 1) * (max - min) + min
@@ -63,7 +61,8 @@ object StockPricePredictionLSTM {
         i += 1; i - 1
       }
     }
-    new Result(predicts, actuals)
+
+    Result(predicts, actuals)
   }
 
 }

@@ -2,7 +2,6 @@ package LSTM.representation;
 
 import com.google.common.collect.ImmutableMap;
 import com.opencsv.CSVReader;
-import javafx.util.Pair;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.dataset.api.DataSetPreProcessor;
@@ -13,11 +12,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Created by zhanghao on 26/7/17.
- * Modified by zhanghao on 28/9/17.
- * @author ZHANG HAO
- */
 public class StockDataSetIterator implements DataSetIterator {
 
     /** category and its index */
@@ -43,7 +37,7 @@ public class StockDataSetIterator implements DataSetIterator {
     /** stock dataset for training */
     private List<StockData> train;
     /** adjusted stock dataset for testing */
-    private List<Pair<INDArray, INDArray>> test;
+    private List<Map.Entry<INDArray, INDArray>> test;
 
     public StockDataSetIterator (String filename, String symbol, int miniBatchSize, int exampleLength, double splitRatio, PriceCategory category) {
         List<StockData> stockDataList = readStockDataFromFile(filename, symbol);
@@ -63,7 +57,7 @@ public class StockDataSetIterator implements DataSetIterator {
         for (int i = 0; i < train.size() - window; i++) { exampleStartOffsets.add(i); }
     }
 
-    public List<Pair<INDArray, INDArray>> getTestDataSet() { return test; }
+    public List<Map.Entry<INDArray, INDArray>> getTestDataSet() { return test; }
 
     public double[] getMaxArray() { return maxArray; }
 
@@ -156,9 +150,9 @@ public class StockDataSetIterator implements DataSetIterator {
 
     @Override public DataSet next() { return next(miniBatchSize); }
     
-    private List<Pair<INDArray, INDArray>> generateTestDataSet (List<StockData> stockDataList) {
+    private List<Map.Entry<INDArray, INDArray>> generateTestDataSet (List<StockData> stockDataList) {
     	int window = exampleLength + predictLength;
-    	List<Pair<INDArray, INDArray>> test = new ArrayList<>();
+    	List<Map.Entry<INDArray, INDArray>> test = new ArrayList<>();
     	for (int i = 0; i < stockDataList.size() - window; i++) {
     		INDArray input = Nd4j.create(new int[] {exampleLength, VECTOR_SIZE}, 'f');
     		for (int j = i; j < i + exampleLength; j++) {
@@ -189,7 +183,7 @@ public class StockDataSetIterator implements DataSetIterator {
                     default: throw new NoSuchElementException();
                 }
             }
-    		test.add(new Pair<>(input, label));
+    		test.add(new AbstractMap.SimpleEntry<>(input, label));
     	}
     	return test;
     }

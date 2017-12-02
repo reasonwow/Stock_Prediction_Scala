@@ -1,9 +1,5 @@
 package LSTM.representation;
 
-/**
- * Created by zhanghao on 26/7/17.
- * @author ZHANG HAO
- */
 public class StockData {
     private String date; // date
     private String symbol; // stock name
