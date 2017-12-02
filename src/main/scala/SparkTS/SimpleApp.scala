@@ -1,15 +1,13 @@
+package SparkTS
+
 import java.time.{ZoneId, ZonedDateTime}
 
-import org.apache.spark.sql.SparkSession
-import yahoofinance.Stock
-import yahoofinance.YahooFinance
-import java.util
-
 import com.cloudera.sparkts.models.ARIMA
-import com.cloudera.sparkts.{BusinessDayFrequency, DateTimeIndex, DayFrequency, TimeSeriesRDD}
+import com.cloudera.sparkts.{BusinessDayFrequency, DateTimeIndex, TimeSeriesRDD}
 import org.apache.spark.mllib.linalg.DenseVector
-import org.apache.spark.sql.types.DoubleType
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.to_timestamp
+import org.apache.spark.sql.types.DoubleType
 
 object SimpleApp {
   def main(args: Array[String]) {
