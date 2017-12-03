@@ -50,8 +50,8 @@ object StockPricePredictionLSTM {
 
   /** Predict one feature of a stock one-day ahead */
   private def predictPriceOneAhead(net: MultiLayerNetwork, testData: List[Map.Entry[INDArray, INDArray]], max: Double, min: Double, category: PriceCategory) = {
-    var predicts = new Array[Double](testData.size)
-    var actuals = new Array[Double](testData.size)
+    val predicts = new Array[Double](testData.size)
+    val actuals = new Array[Double](testData.size)
     var i = 0
     while (i < testData.size) {
       predicts(i) = net.rnnTimeStep(testData.get(i).getKey).getDouble(exampleLength - 1) * (max - min) + min
