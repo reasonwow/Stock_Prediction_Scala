@@ -15,16 +15,16 @@ import scala.collection.mutable.ListBuffer
 object SparkLSTM {
   def main(args: Array[String])= {
     BasicConfigurator.configure()
-    val result: Result = StockPricePredictionLSTM.predict("/Users/kym1992/STUDY/NEU/CSYE7200/Dataset/nyse/prices-split-adjusted.csv", "DIS", 0.90)
+    val result: Result = StockPricePredictionLSTM.predict("/Users/kym1992/STUDY/NEU/CSYE7200/Dataset/nyse/prices-split-adjusted.csv", args(0), 0.90)
     println("predicts, actual")
     (result.predicts, result.actuals).zipped.foreach((x, y) => println(x + ", " + y))
-    saveAsCsv(result)
+    saveAsCsv(result, args(0))
   }
 
-  def saveAsCsv(result: Result): Unit =  {
+  def saveAsCsv(result: Result, stockCode: String): Unit =  {
     //https://blog.knoldus.com/2017/01/01/csv-file-writer-using-scala/
     val outputFile = new BufferedWriter(new FileWriter
-    ("src/main/resources/DIS.csv")) //replace the path with the
+    ("src/main/resources/" + stockCode + ".csv")) //replace the path with the
     // desired path and filename with the desired filename
     val csvWriter = new CSVWriter(outputFile)
     val csvFields = Array("predicts", "actual")
