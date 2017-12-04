@@ -40,10 +40,9 @@ object ClosingPrice {
     Try(ClosingPrice(date, stockSymbol, close.toDouble))
   }
 
-  def saveAsCsv(priceSeqBySymbol: Seq[ClosingPrice]): Unit =  {
+  def saveAsCsv(priceSeqBySymbol: Seq[ClosingPrice], outputPath:String)  {
     //https://blog.knoldus.com/2017/01/01/csv-file-writer-using-scala/
-    val outputFile = new BufferedWriter(new FileWriter
-    ("src/main/resources/preData_TS.csv")) //replace the path with the
+    val outputFile = new BufferedWriter(new FileWriter(outputPath)) //"src/main/resources/preData_TS.csv"
     // desired path and filename with the desired filename
     val csvWriter = new CSVWriter(outputFile)
     val csvFields = Array("date", "symbol", "close")
