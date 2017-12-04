@@ -12,7 +12,7 @@ import org.nd4j.linalg.api.ndarray.INDArray
 object StockPricePredictionLSTM {
   val exampleLength: Int = 22
 
-  def predict(file: String, symbol: String, splitRatio: Double): Result = {
+  def prepare(file: String, symbol: String, splitRatio: Double): (MultiLayerNetwork, List[Map.Entry[INDArray, INDArray]], Double, Double, PriceCategory) = {
     val batchSize: Int = 64
     val epochs = 100 // training epochs
 
@@ -45,11 +45,11 @@ object StockPricePredictionLSTM {
 
     val max: Double = iterator.getMaxNum(category)
     val min: Double = iterator.getMinNum(category)
-    predictPriceOneAhead(net, test, max, min, category)
+    (net, test, max, min, category)
   }
 
   /** Predict one feature of a stock one-day ahead */
-  private def predictPriceOneAhead(net: MultiLayerNetwork, testData: List[Map.Entry[INDArray, INDArray]], max: Double, min: Double, category: PriceCategory) = {
+  def predictPriceOneAhead(net: MultiLayerNetwork, testData: List[Map.Entry[INDArray, INDArray]], max: Double, min: Double, category: PriceCategory) = {
     val predicts = new Array[Double](testData.size)
     val actuals = new Array[Double](testData.size)
     var i = 0
