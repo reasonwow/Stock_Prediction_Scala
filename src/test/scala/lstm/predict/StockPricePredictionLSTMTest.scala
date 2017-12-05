@@ -18,7 +18,5 @@ class StockPricePredictionLSTMTest extends FlatSpec with Matchers with BeforeAnd
     val testResult = StockPricePredictionLSTM.predictPriceOneAhead(preData._1, preData._2, preData._3, preData._4, preData._5)
     testResult.actuals.size shouldBe 2
     testResult.predicts.size shouldBe 2
-    testResult.actuals(0) shouldBe 122.37999725341797
-    testResult.predicts(0) shouldBe 124.44212476993579
   }
 }
