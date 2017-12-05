@@ -1,6 +1,5 @@
 package ingest
 
-import SparkTS.SparkTS.args
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.io.{Codec, Source}
