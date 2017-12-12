@@ -3,8 +3,9 @@ package lstm.predict
 import java.io.File
 import java.util.{List, Map}
 
+import com.isaac.stock.representation.{PriceCategory, StockDataSetIterator}
 import lstm.model.RecurrentNets
-import lstm.representation.{PriceCategory, Result, StockDataSetIterator}
+import lstm.representation.Result
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.deeplearning4j.util.ModelSerializer
 import org.nd4j.linalg.api.ndarray.INDArray

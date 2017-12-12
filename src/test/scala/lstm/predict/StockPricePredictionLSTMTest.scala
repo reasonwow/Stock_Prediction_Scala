@@ -1,6 +1,6 @@
 package lstm.predict
 
-import lstm.representation.PriceCategory
+import com.isaac.stock.representation.PriceCategory
 import org.scalatest.{BeforeAndAfter, FlatSpec, Matchers}
 
 class StockPricePredictionLSTMTest extends FlatSpec with Matchers with BeforeAndAfter {
