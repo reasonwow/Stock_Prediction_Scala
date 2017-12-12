@@ -28,7 +28,7 @@ object SparkTS extends App {
     //    println(priceSeqBySymbol.toList)
     ClosingPrice.saveAsCsv(priceSeqBySymbol, outputPath)
 
-    val preDataFilePath = "src/main/resources/preData_TS.csv"
+    val preDataFilePath = outputPath
 
     implicit val spark = SparkSession.builder.appName("SparkTS").config("spark.master", "local").getOrCreate()
 
