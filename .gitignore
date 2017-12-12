@@ -1,6 +1,7 @@
 *.class
 *.log
 *.jar
+!lib/**/*.jar
 *.classpath
 *.iml
 .idea/
