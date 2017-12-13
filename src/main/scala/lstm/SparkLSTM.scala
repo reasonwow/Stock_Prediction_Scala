@@ -14,12 +14,16 @@ import scala.collection.mutable.ListBuffer
 
 object SparkLSTM {
   def main(args: Array[String])= {
-    BasicConfigurator.configure()
-    val prepared = StockPricePredictionLSTM.prepare("/Users/kym1992/STUDY/NEU/CSYE7200/Dataset/nyse/prices-split-adjusted.csv", args(0), 0.90)
-    val result = StockPricePredictionLSTM.predictPriceOneAhead(prepared._1, prepared._2, prepared._3, prepared._4, prepared._5)
-    println("predicts, actual")
-    (result.predicts, result.actuals).zipped.foreach((x, y) => println(x + ", " + y))
-    saveAsCsv(result, args(0))
+    if (args.length == 2) {
+      val filePath = args(0)    //"/Users/kym1992/STUDY/NEU/CSYE7200/Dataset/nyse/prices-split-adjusted.csv"
+      val symbolName = args(1)
+      BasicConfigurator.configure()
+      val prepared = StockPricePredictionLSTM.prepare(filePath, symbolName, 0.90)
+      val result = StockPricePredictionLSTM.predictPriceOneAhead(prepared._1, prepared._2, prepared._3, prepared._4, prepared._5)
+      println("predicts, actual")
+      (result.predicts, result.actuals).zipped.foreach((x, y) => println(x + ", " + y))
+      saveAsCsv(result, symbolName)
+    }
   }
 
   def saveAsCsv(result: Result, stockCode: String): Unit =  {
