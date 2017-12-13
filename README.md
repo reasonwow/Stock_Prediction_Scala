@@ -42,5 +42,16 @@ Spark Timeseries:
 3. Symbol Name
 4. Number of dates to predict
 
+eg: /Users/{username}/{SourceFileDir}/prices-split-adjusted.csv src/main/resources/preData_AAPL_TS.csv AAPL 5
+
+Output:
+Array of Symbol Name and predict results rendered in terminal.
+
 LSTM:
-1. Symbol Name to predict
+1. Source File Path
+2. Symbol Name to predict
+
+eg: /Users/{username}/{SourceFileDir}/prices-split-adjusted.csv AAPL
+
+Output: 
+Saved as csv file in src/main/resources/{symbolName}.csv
